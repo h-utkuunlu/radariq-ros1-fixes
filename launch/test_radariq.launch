@@ -1,0 +1,6 @@
+<launch>
+  <include file="$(find radariq_ros)/launch/radariq.launch" />
+
+  <node name="RadarIQTestApplication" pkg="radariq_ros" type="example_application.py" output="screen">
+  </node>
+</launch>
