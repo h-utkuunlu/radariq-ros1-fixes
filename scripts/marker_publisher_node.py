@@ -6,6 +6,7 @@ import rospy
 
 from visualization_msgs.msg import Marker, MarkerArray
 from std_msgs.msg import Header
+from radariq_ros.msg import RadarIQObject, RadarIQObjects
 from radariq import RadarIQ, MODE_OBJECT_TRACKING, OUTPUT_LIST
 
 riq = None
@@ -38,12 +39,38 @@ def build_marker(detection):
 
     return marker
 
+
 def build_marker_array(riq_objects):
     markers = MarkerArray()
     for detection in riq_objects:
         marker = build_marker(detection)
         markers.markers.append(marker)
     return markers
+
+
+def build_object(detection):
+    obj = RadarIQObject()
+    obj.tracking_id = detection['tracking_id']
+    obj.position.x = detection['x_pos']
+    obj.position.y = detection['y_pos']
+    obj.position.z = detection['z_pos']
+    obj.velocity.x = detection['x_vel']
+    obj.velocity.y = detection['y_vel']
+    obj.velocity.z = detection['z_vel']
+    obj.acceleration.x = detection['x_acc']
+    obj.acceleration.y = detection['y_acc']
+    obj.acceleration.z = detection['z_acc']
+    return obj
+
+
+def build_object_array(riq_objects):
+    objs = RadarIQObjects()
+    objs.header.stamp = rospy.Time.now()
+    objs.header.frame_id = "map"
+    for detection in riq_objects:
+        obj = build_object(detection)
+        objs.objects.append(obj)
+    return objs
 
 
 def run():
@@ -58,7 +85,8 @@ def run():
     anglefilter_max = rospy.get_param('~anglefilter_max')
     pointdensity = rospy.get_param('~pointdensity')
     certainty = rospy.get_param('~certainty')
-    publisher = rospy.Publisher("/radariq_markers", MarkerArray, queue_size=10)
+    marker_publisher = rospy.Publisher("/radariq_markers", MarkerArray, queue_size=10)
+    object_publisher = rospy.Publisher("/radariq_objects", RadarIQObjects, queue_size=10)
 
     header = Header()
     header.frame_id = "map"
@@ -79,8 +107,10 @@ def run():
             if rospy.is_shutdown():
                 break
             markers = build_marker_array(row)
-            publisher.publish(markers)
-            #rospy.loginfo("Input buffer length: {}".format(riq.get_queue_size()))
+            objs = build_object_array(row)
+            marker_publisher.publish(markers)
+            object_publisher.publish(objs)
+            # rospy.loginfo("Input buffer length: {}".format(riq.get_queue_size()))
 
     except Exception as error:
         rospy.logerr(error)

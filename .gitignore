@@ -23,3 +23,24 @@ py2venv/
 
 #temporary
 scripts/python-sdk/
+
+# CMake
+CMakeLists.txt.user
+CMakeCache.txt
+CMakeFiles
+CMakeScripts
+Testing
+Makefile
+cmake_install.cmake
+install_manifest.txt
+compile_commands.json
+CTestTestfile.cmake
+_deps
+cmake/
+CTestCustom.cmake
+CTestConfiguration.ini
+
+# Built
+devel/
+catkin_generated/
+atomic_configure/
