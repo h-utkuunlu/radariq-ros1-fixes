@@ -1,0 +1,13 @@
+material RadarIQLogo{
+    technique
+    {
+        pass
+        {
+            texture_unit
+            {
+                texture logo.png
+                scale 1 1
+            }
+        }
+    }
+}

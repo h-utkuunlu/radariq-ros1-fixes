@@ -1,5 +1,0 @@
-<!-- Visualise RadarIQ Point Cloud data. Requires radariq.launch -->
-<launch>
-  <include file="$(find radariq_ros)/launch/radariq.launch" />
-  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find radariq_ros)/rviz/radariq.rviz" />
-</launch>

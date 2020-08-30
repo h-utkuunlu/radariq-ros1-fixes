@@ -60,13 +60,19 @@ Note: These instructions assume your workspace is named ``catkin_ws``. If your w
    ``catkin_make``
 
 # Visualize the data using RViz
-RadarIQ data can be started and visualised using the ROS RViz tool.
+RadarIQ pointcloud data can be started and visualised using the ROS RViz tool.
 
 1. From your ROS workspace run
 
-   ``roslaunch radariq_ros view_radariq.launch``
+   ``roslaunch radariq_ros view_radariq_pointcloud.launch``
 
-The RadarIQ module should start up and RViz should open, showing a point cloud of detected objects.
+The RadarIQ module should start up and RViz should open, showing a point cloud of detections.
+
+2. From your ROS workspace run
+
+   ``roslaunch radariq_ros view_radariq_objects.launch``
+
+The RadarIQ module should start up and RViz should open, showing a object representations of the detections.
 
 # Incorporate into an existing ROS project
 These instructions explain how to incorporate RadarIQ into an existing ROS workspace using a provided sample application

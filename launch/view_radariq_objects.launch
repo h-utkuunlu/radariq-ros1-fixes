@@ -1,0 +1,6 @@
+<!-- Visualise RadarIQ Object data. Requires radariq_objects.launch -->
+<launch>
+  <include file="$(find radariq_ros)/launch/radariq_objects.launch" />
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find radariq_ros)/rviz/radariq_objects.rviz" />
+  <param name="robot_description" textfile="$(find radariq_ros)/rviz/radariq_sensor.urdf" />
+</launch>

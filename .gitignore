@@ -20,3 +20,6 @@ py2venv/
 
 # IDE
 .idea/
+
+#temporary
+scripts/python-sdk/

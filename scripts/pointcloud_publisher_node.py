@@ -30,7 +30,7 @@ to the /radariq ROS topic
 import sys
 import signal
 import rospy
-from radariq import RadarIQ, MODE_POINT_CLOUD
+from radariq import RadarIQ, MODE_POINT_CLOUD, OUTPUT_LIST
 
 from sensor_msgs import point_cloud2
 from sensor_msgs.msg import PointCloud2, PointField
@@ -85,20 +85,14 @@ def run():
     except Exception as error:
         rospy.logerr(error)
     finally:
-        rospy.loginfo("Stopping RadarIQ module")
-        try:
-            riq.stop()
-        except Exception:
-            pass
-
         del riq
+        rospy.loginfo("Stopped RadarIQ module")
 
 
 def signal_handler(sig, frame):
     global riq
     print('You pressed Ctrl+C!')
-    del riq
-    sys.exit(0)
+    riq.close()
 
 
 if __name__ == '__main__':
