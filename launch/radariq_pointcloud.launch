@@ -1,0 +1,30 @@
+<launch>
+  <node name="RadarIQNode" pkg="radariq_ros" type="pointcloud_publisher_node.py" output="screen">
+    <!-- Configuration for the RadarIQ module.
+         Please see the manual at https://radariq.io for more information about these settings -->
+
+
+    <!-- Assumes port mapping script has been run -->
+    <param name="serial_port"         type="string" value="/dev/radariq"/>
+
+    <!-- Point cloud mode -->
+    <param name="mode"           type="int"    value="0"/>
+
+    <!-- Number of frames per second to run the module at -->
+    <param name="framerate"           type="int"    value="10"/>
+
+    <!-- Distance range to restrict capture to (units are m)-->
+    <param name="distancefilter_min"  type="double"    value="0"/>
+    <param name="distancefilter_max"  type="double"    value="10"/>
+
+    <!-- Angular range to restrict capture to (units are degrees)-->
+    <param name="anglefilter_min"     type="int"    value="-45"/>
+    <param name="anglefilter_max"     type="int"    value="45"/>
+
+    <!-- Desired density of points (0 = low, 1 = med, 2 = high) -->
+    <param name="pointdensity"        type="int"    value="1"/>
+
+    <!-- Desired level of point certainty to apply (0 - 9) -->
+    <param name="certainty"           type="int"    value="5"/>
+  </node>
+</launch>

@@ -10,7 +10,6 @@ from __future__ import division
 import numbers
 from math import log10, floor
 
-
 # Conversion factors for distance conversion (from meters)
 distance_lookup = {
     "mm": 1000,
@@ -31,6 +30,15 @@ speed_lookup = {
     "in/s": 39.3701,
     "ft/s": 3.28084,
     "mi/h": 2.237
+}
+
+# Conversion factors for acceleration conversion (from meters/second)
+acceleration_lookup = {
+    "mm/s^2": 1000,
+    "cm/s^2": 100,
+    "m/s^2": 1,
+    "in/s^2": 39.3701,
+    "ft/s^2": 3.28084,
 }
 
 
@@ -120,6 +128,52 @@ def convert_speed_from_si(units, speed):
 
     factor = speed_lookup[units]
     return round_sig(speed * factor)
+
+
+def convert_acceleration_to_si(units, acceleration):
+    """
+    Converts speed from meters per square second to other units.
+
+    :param units: One of the units listed in the speed lookup dictionary
+    :type units: str
+    :param acceleration: The acceleration to convert from
+    :type acceleration: number
+    :return: The converted acceleration
+    :rtype: float
+    """
+    global acceleration_lookup
+
+    if not isinstance(acceleration, numbers.Real):
+        raise ValueError("Acceleration must be a number")
+
+    if units not in acceleration_lookup:
+        raise ValueError("Invalid units for acceleration conversion")
+
+    factor = acceleration_lookup[units]
+    return round_sig(acceleration / factor)
+
+
+def convert_acceleration_from_si(units, acceleration):
+    """
+    Converts acceleration from other units to metres per square second.
+
+    :param units: One of the units listed in the acceleration lookup dictionary
+    :type units: str
+    :param acceleration: The acceleration to convert from
+    :type acceleration: number
+    :return: The converted acceleration
+    :rtype: float
+    """
+    global acceleration_lookup
+
+    if not isinstance(acceleration, numbers.Real):
+        raise ValueError("Acceleration must be a number")
+
+    if units not in acceleration_lookup:
+        raise ValueError("Invalid units for acceleration conversion")
+
+    factor = acceleration_lookup[units]
+    return round_sig(acceleration * factor)
 
 
 def round_sig(x, sig=4):

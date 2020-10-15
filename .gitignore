@@ -1,0 +1,46 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+
+# Distribution / packaging
+build/
+dist/
+
+# PyInstaller
+#  Usually these files are written by a python script from a template
+#  before PyInstaller builds the exe, so as to inject date/other infos into it.
+*.manifest
+*.spec
+
+# Sphinx documentation
+docs/_build/
+
+# Environments
+venv/
+py2venv/
+
+# IDE
+.idea/
+
+#temporary
+scripts/python-sdk/
+
+# CMake
+CMakeLists.txt.user
+CMakeCache.txt
+CMakeFiles
+CMakeScripts
+Testing
+Makefile
+cmake_install.cmake
+install_manifest.txt
+compile_commands.json
+CTestTestfile.cmake
+_deps
+cmake/
+CTestCustom.cmake
+CTestConfiguration.ini
+
+# Built
+devel/
+catkin_generated/
+atomic_configure/
