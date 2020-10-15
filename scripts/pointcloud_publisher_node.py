@@ -78,9 +78,10 @@ def run():
         for row in riq.get_data():
             if rospy.is_shutdown():
                 break
-            pc2 = point_cloud2.create_cloud(header, fields, row)
-            pc2.header.stamp = rospy.Time.now()
-            pub.publish(pc2)
+            if row is not None:
+                pc2 = point_cloud2.create_cloud(header, fields, row)
+                pc2.header.stamp = rospy.Time.now()
+                pub.publish(pc2)
 
     except Exception as error:
         rospy.logerr(error)

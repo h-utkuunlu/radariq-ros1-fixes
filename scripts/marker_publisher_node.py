@@ -103,14 +103,15 @@ def run():
         riq.start()
         rospy.loginfo("Starting the RadarIQ module")
 
-        for row in riq.get_data(100):
+        for row in riq.get_data():
             if rospy.is_shutdown():
                 break
-            markers = build_marker_array(row)
-            objs = build_object_array(row)
-            marker_publisher.publish(markers)
-            object_publisher.publish(objs)
-            # rospy.loginfo("Input buffer length: {}".format(riq.get_queue_size()))
+            if row is not None:
+                markers = build_marker_array(row)
+                objs = build_object_array(row)
+                marker_publisher.publish(markers)
+                object_publisher.publish(objs)
+                # rospy.loginfo("Input buffer length: {}".format(riq.get_queue_size()))
 
     except Exception as error:
         rospy.logerr(error)
