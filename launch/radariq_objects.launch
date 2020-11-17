@@ -1,5 +1,5 @@
 <launch>
-  <node name="RadarIQNode" pkg="radariq_ros" type="marker_publisher_node.py" output="screen">
+  <node name="RadarIQNode" pkg="radariq_ros" type="object_publisher_node.py" output="screen">
     <!-- Configuration for the RadarIQ module.
          Please see the manual at https://radariq.io for more information about these settings -->
 
@@ -7,8 +7,17 @@
     <!-- Assumes port mapping script has been run -->
     <param name="serial_port"         type="string" value="/dev/radariq"/>
 
+    <!-- Topic to publish object data to -->
+    <param name="object_data_topic"   type="string" value="radariq_objects"/>
+
+    <!-- Topic to publish makers to -->
+    <param name="marker_topic"        type="string" value="radariq_markers"/>
+
+    <!-- FrameID -->
+    <param name="frame_id"            type="string" value="radar"/>
+
     <!-- Objects mode -->
-    <param name="mode"           type="int"    value="1"/>
+    <param name="mode"                type="int"    value="1"/>
 
     <!-- Number of frames per second to run the module at -->
     <param name="framerate"           type="int"    value="10"/>

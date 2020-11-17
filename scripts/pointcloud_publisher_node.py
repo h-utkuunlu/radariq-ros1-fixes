@@ -51,8 +51,9 @@ def run():
     anglefilter_max = rospy.get_param('~anglefilter_max')
     pointdensity = rospy.get_param('~pointdensity')
     certainty = rospy.get_param('~certainty')
-    print(serial_port)
-    pub = rospy.Publisher("/radariq", PointCloud2, queue_size=10)
+    topic = rospy.get_param('~topic')
+    frame_id = rospy.get_param('~frame_id')
+    pub = rospy.Publisher(topic, PointCloud2, queue_size=10)
 
     fields = [PointField('x', 0, PointField.FLOAT32, 1),
               PointField('y', 4, PointField.FLOAT32, 1),
@@ -61,7 +62,7 @@ def run():
               ]
 
     header = Header()
-    header.frame_id = "map"
+    header.frame_id = frame_id
 
     try:
         riq = RadarIQ(port=serial_port)

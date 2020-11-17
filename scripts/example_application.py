@@ -23,7 +23,7 @@
 # THE SOFTWARE.
 
 """
-Example application for listening to the /radariq ROS topic
+Example application for listening to the radariq ROS topic
 """
 
 
@@ -35,7 +35,7 @@ def callback(data):
 
 def listener():
     rospy.init_node('RadarIQExampleApplication', anonymous=True)
-    rospy.Subscriber('/radariq', PointCloud2, callback)
+    rospy.Subscriber('radariq', PointCloud2, callback)
     rospy.spin()
 
 if __name__ == '__main__':

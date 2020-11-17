@@ -5,7 +5,7 @@
         <color rgba="0 0.2 0.63 1"/>
     </material>
 
-    <link name="map">
+    <link name="radar">
         <visual>
             <geometry>
                 <box size="0.6 0.1 0.6"/>

@@ -4,11 +4,12 @@ Panels:
     Name: Displays
     Property Tree Widget:
       Expanded:
+        - /Global Options1
+        - /Status1
         - /Grid1
         - /Grid1/Offset1
         - /RadarIQ Objects1
         - /RadarIQSensorModel1
-        - /RadarIQSensorModel1/Status1
       Splitter Ratio: 0.5
     Tree Height: 435
   - Class: rviz/Selection
@@ -56,10 +57,10 @@ Visualization Manager:
       Value: true
     - Class: rviz/MarkerArray
       Enabled: true
-      Marker Topic: /radariq_markers
+      Marker Topic: radariq_markers
       Name: RadarIQ Objects
       Namespaces:
-        {}
+        riq-object-markers: true
       Queue Size: 100
       Value: true
     - Alpha: 1
@@ -72,6 +73,11 @@ Visualization Manager:
         Expand Link Details: false
         Expand Tree: false
         Link Tree Style: ""
+        radar:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
       Name: RadarIQSensorModel
       Robot Description: robot_description
       TF Prefix: ""
@@ -82,7 +88,7 @@ Visualization Manager:
   Global Options:
     Background Color: 48; 48; 48
     Default Light: true
-    Fixed Frame: map
+    Fixed Frame: radar
     Frame Rate: 30
   Name: root
   Tools:
@@ -103,7 +109,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 7.18657684
+      Distance: 7.79767323
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.0599999987
         Stereo Focal Distance: 1

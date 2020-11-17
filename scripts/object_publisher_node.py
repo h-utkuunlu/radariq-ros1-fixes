@@ -13,15 +13,18 @@ riq = None
 colors = [[0, 0.5, 0], [1, 0, 0], [1, 1, 0], [0, 1, 0], [0.55, 0.27, 0.7],
           [0, 1, 1], [1, 0, 1], [0.39, 0.58, 0.93], [1, 0.41, 0.71], [1, 0.89, 0.77]]
 
+global frame_id
 
 def build_marker(detection):
+    global frame_id
+
     color_idx = detection['tracking_id'] % len(colors)
 
     marker = Marker()
     marker.header.stamp = rospy.Time.now()
     marker.ns = "riq-object-markers"
     marker.id = detection['tracking_id']
-    marker.header.frame_id = "map"
+    marker.header.frame_id = frame_id
     marker.type = marker.SPHERE
     marker.action = marker.ADD
     marker.lifetime = rospy.Duration(1)  # Auto expire markers after 1 second unless they are updated
@@ -64,9 +67,11 @@ def build_object(detection):
 
 
 def build_object_array(riq_objects):
+    global frame_id
+
     objs = RadarIQObjects()
     objs.header.stamp = rospy.Time.now()
-    objs.header.frame_id = "map"
+    objs.header.frame_id = frame_id
     for detection in riq_objects:
         obj = build_object(detection)
         objs.objects.append(obj)
@@ -74,7 +79,7 @@ def build_object_array(riq_objects):
 
 
 def run():
-    global riq
+    global riq, frame_id
 
     rospy.init_node("RadarIQObjectNode")
     serial_port = rospy.get_param('~serial_port')
@@ -85,11 +90,14 @@ def run():
     anglefilter_max = rospy.get_param('~anglefilter_max')
     pointdensity = rospy.get_param('~pointdensity')
     certainty = rospy.get_param('~certainty')
-    marker_publisher = rospy.Publisher("/radariq_markers", MarkerArray, queue_size=10)
-    object_publisher = rospy.Publisher("/radariq_objects", RadarIQObjects, queue_size=10)
+    marker_topic = rospy.get_param('~marker_topic')
+    object_data_topic = rospy.get_param('~object_data_topic')
+    frame_id = rospy.get_param('~frame_id')
+    marker_publisher = rospy.Publisher(marker_topic, MarkerArray, queue_size=10)
+    object_publisher = rospy.Publisher(object_data_topic, RadarIQObjects, queue_size=10)
 
     header = Header()
-    header.frame_id = "map"
+    header.frame_id = frame_id
 
     try:
         riq = RadarIQ(port=serial_port, output_format=OUTPUT_LIST)
