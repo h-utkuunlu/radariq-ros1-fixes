@@ -3,7 +3,6 @@
     <!-- Configuration for the RadarIQ module.
          Please see the manual at https://radariq.io for more information about these settings -->
 
-
     <!-- Assumes port mapping script has been run -->
     <param name="serial_port"         type="string" value="/dev/radariq"/>
 
