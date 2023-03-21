@@ -31,7 +31,7 @@ import rospy
 from sensor_msgs.msg import PointCloud2
 
 def callback(data):
-    rospy.loginfo(rospy.get_caller_id(), data)
+    rospy.loginfo("Data received at %s", rospy.get_caller_id())
 
 def listener():
     rospy.init_node('RadarIQExampleApplication', anonymous=True)
