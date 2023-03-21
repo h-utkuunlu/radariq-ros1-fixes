@@ -12,6 +12,11 @@ In this tutorial you will learn how to:
 3. Visualize the data using RViz.
 4. Configure settings and incorporate the module into an existing ROS project.
 
+# Install Python SDK
+Install the Python SDK by running
+
+``pip install radariq``
+
 # Configure Linux
 By default USB devices are presented to the Linux Kernel as /dev/ttyACMxx (where xx is a number).
 The exact device name changes depending on the order in which the USB devices are connected or detected by the kernel.
