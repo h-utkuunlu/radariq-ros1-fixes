@@ -50,7 +50,7 @@ def run():
     anglefilter_min = rospy.get_param('~anglefilter_min')
     anglefilter_max = rospy.get_param('~anglefilter_max')
     pointdensity = rospy.get_param('~pointdensity')
-    certainty = rospy.get_param('~certainty')
+    sensitivity = rospy.get_param('~sensitivity')
 
     topic = rospy.get_param('~topic')
     frame_id = rospy.get_param('~frame_id')
@@ -60,7 +60,8 @@ def run():
     fields = [PointField('x', 0, PointField.FLOAT32, 1),
               PointField('y', 4, PointField.FLOAT32, 1),
               PointField('z', 8, PointField.FLOAT32, 1),
-              PointField('intensity', 16, PointField.FLOAT32, 1),
+              PointField('intensity', 12, PointField.UINT8, 1),
+              PointField('velocity', 13, PointField.FLOAT32, 1),
               ]
 
     header = Header()
@@ -74,7 +75,7 @@ def run():
         riq.set_distance_filter(distancefilter_min, distancefilter_max)
         riq.set_angle_filter(anglefilter_min, anglefilter_max)
         riq.set_point_density(pointdensity)
-        riq.set_certainty(certainty)
+        riq.set_sensitivity(sensitivity)
         riq.start()
         rospy.loginfo("Starting the RadarIQ module")
 
