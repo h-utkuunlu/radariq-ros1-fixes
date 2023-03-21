@@ -53,7 +53,7 @@ Note: These instructions assume your workspace is named ``catkin_ws``. If your w
    
 3. Clone the RadarIQ ROS repository into the src directory.
 
-   ``git clone https://github.com/radariq/ros ./src/radariq_ros``
+   ``git clone https://github.com/radariq/ros1 ./src/radariq_ros``
 
 4. Run catkin_make to make the workspace.
 
